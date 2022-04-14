@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head'
 // import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import dynamic from 'next/dynamic'
 
-import covidData from '../assets/data.js'
+// import covidData from '../assets/data.js'
+import useSWR from 'swr'
 
 const CovidChart = dynamic(
   () => import('../components/covidChart'),
@@ -18,9 +19,31 @@ const CovidChart = dynamic(
 //   // Pass data to the page via props
 //   return { props: { data } }
 // }
+const fetcher = (...args) => fetch(...args).then(res => res.json());
 
-const Home = ({ data }) => {
-  // const covidData = data;
+const Home = () => {
+  const [lang, setLang] = useState('cn');
+
+  // const [covidData, setData] = useState(null);
+  // const [isLoading, setLoading] = useState(false);
+  
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch('/jason/apps/covidData.json')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data);
+  //       setLoading(false);
+  //     })
+  // }, [])
+  // if (isLoading) return <p>Loading...</p>
+  // if (!covidData) return <p>no data</p>
+  
+  const { data, error } = useSWR('/jason/apps/covidData.json', fetcher)
+  
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  const covidData = data;
   const covidRecordDate = covidData.map(item => item.date);
   const newConfirmed = covidData.map(item => item.newConfirmed);
   const totalConfirmed = [];
@@ -97,7 +120,7 @@ const Home = ({ data }) => {
     },
   ]
 
-  const [lang, setLang] = useState('cn');
+  
   const switchLang = (lang) => {
     setLang(lang);
   }

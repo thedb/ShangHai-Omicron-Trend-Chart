@@ -7,7 +7,7 @@
 
 const withTM = require('next-transpile-modules')(['echarts', 'zrender']);
 
-module.exports = withTM({
+const myModule = module.exports = withTM({
   assetPrefix: ".",
   exportPathMap: async function(
     defaultPathMap,
@@ -18,3 +18,12 @@ module.exports = withTM({
     };
   }
 });
+
+myModule.rewrites = async () => {
+  return [
+    {
+      source: "/jason/apps/covidData.json",
+      destination: "http://qianke.xyz/jason/apps/covidData.json",
+    },
+  ];
+};
