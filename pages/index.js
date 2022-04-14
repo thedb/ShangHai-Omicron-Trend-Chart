@@ -4,23 +4,23 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import dynamic from 'next/dynamic'
 
-// import covidData from '../assets/data.js'
+import covidData from '../assets/data.js'
 
 const CovidChart = dynamic(
   () => import('../components/covidChart'),
   { ssr: false }
 )
-// This gets called on every request
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`http://qianke.xyz/jason/apps/covidData.json`)
-  const data = await res.json()
-  // Pass data to the page via props
-  return { props: { data } }
-}
+// // This gets called on every request
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   const res = await fetch(`http://qianke.xyz/jason/apps/covidData.json`)
+//   const data = await res.json()
+//   // Pass data to the page via props
+//   return { props: { data } }
+// }
 
 const Home = ({ data }) => {
-  const covidData = data;
+  // const covidData = data;
   const covidRecordDate = covidData.map(item => item.date);
   const newConfirmed = covidData.map(item => item.newConfirmed);
   const totalConfirmed = [];
