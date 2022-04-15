@@ -43,6 +43,7 @@ const covidData = [
   { date: '4.11', newConfirmed: 994, newAsymptomatic: 22348 },
   { date: '4.12', newConfirmed: 1189, newAsymptomatic: 25141 },
   { date: '4.13', newConfirmed: 2573, newAsymptomatic: 25146 },
+  { date: '4.14', newConfirmed: 3200, newAsymptomatic: 19872 }
 ];
 
 export default covidData;
