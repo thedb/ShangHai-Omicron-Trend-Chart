@@ -8,7 +8,8 @@
 const withTM = require('next-transpile-modules')(['echarts', 'zrender']);
 
 const myModule = module.exports = withTM({
-  assetPrefix: ".",
+  assetPrefix: './',
+  // trailingSlash: true,
   exportPathMap: async function(
     defaultPathMap,
     { dev, dir, outDir, distDir, buildId }
@@ -16,7 +17,17 @@ const myModule = module.exports = withTM({
     return {
       '/': { page: '/' },
     };
-  }
+  },
+  webpackDevMiddleware: config => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    }
+    return config
+  },
+  experimental: {
+    outputStandalone: true,
+  },
 });
 
 myModule.rewrites = async () => {

@@ -1,0 +1,21 @@
+# docker-compose.yml
+
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docker-nextjs-jason
+    restart: always
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - 3111:3000
+    networks:
+      default:
+        aliases:
+          - docker.jason
