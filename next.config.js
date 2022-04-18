@@ -5,7 +5,7 @@
 
 // module.exports = nextConfig
 
-const withTM = require('next-transpile-modules')(['echarts', 'zrender']);
+const withTM = require('next-transpile-modules')(['echarts', 'zrender', 'vconsole']);
 
 const myModule = module.exports = withTM({
   assetPrefix: './',
@@ -35,6 +35,10 @@ myModule.rewrites = async () => {
     {
       source: "/jason/apps/covidData.json",
       destination: "http://qianke.xyz/jason/apps/covidData.json",
+    },
+    {
+      source: "/h5_gallery_api/wx_config",
+      destination: "http://gallery-test.qianke.xyz/h5_gallery_api/wx_config",
     },
   ];
 };

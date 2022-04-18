@@ -10,7 +10,7 @@
     "core-js-pure" "^3.20.2"
     "regenerator-runtime" "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.16.3":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.2":
   "integrity" "sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg=="
   "resolved" "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.17.9.tgz"
   "version" "7.17.9"
@@ -295,10 +295,20 @@
   "resolved" "https://registry.npmmirror.com/concat-map/-/concat-map-0.0.1.tgz"
   "version" "0.0.1"
 
+"copy-text-to-clipboard@^3.0.1":
+  "integrity" "sha512-rvVsHrpFcL4F2P8ihsoLdFHmd404+CMg71S756oRSeQgqk51U3kicGdnvfkrxva0xXH92SjGS62B0XIJsbh+9Q=="
+  "resolved" "https://registry.npmmirror.com/copy-text-to-clipboard/-/copy-text-to-clipboard-3.0.1.tgz"
+  "version" "3.0.1"
+
 "core-js-pure@^3.20.2":
   "integrity" "sha512-12VZfFIu+wyVbBebyHmRTuEE/tZrB4tJToWcwAMcsp3h4+sHR+fMJWbKpYiCRWlhFBq+KNyO8rIV9rTkeVmznQ=="
   "resolved" "https://registry.npmmirror.com/core-js-pure/-/core-js-pure-3.21.1.tgz"
   "version" "3.21.1"
+
+"core-js@^3.11.0":
+  "integrity" "sha512-8h9jBweRjMiY+ORO7bdWSeWfHhLPO7whobj7Z2Bl0IDo00C228EdGgH7FE4jGumbEjzcFfkfW8bXgdkEDhnwHQ=="
+  "resolved" "https://registry.npmmirror.com/core-js/-/core-js-3.22.0.tgz"
+  "version" "3.22.0"
 
 "cross-spawn@^7.0.2":
   "integrity" "sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w=="
@@ -1092,6 +1102,11 @@
   "resolved" "https://registry.npmmirror.com/ms/-/ms-2.0.0.tgz"
   "version" "2.0.0"
 
+"mutation-observer@^1.0.3":
+  "integrity" "sha512-M/O/4rF2h776hV7qGMZUH3utZLO/jK7p8rnNgGkjKUw8zCGjRQPxB8z6+5l8+VjRUQ3dNYu4vjqXYLr+U8ZVNA=="
+  "resolved" "https://registry.npmmirror.com/mutation-observer/-/mutation-observer-1.0.3.tgz"
+  "version" "1.0.3"
+
 "nanoid@^3.1.30":
   "integrity" "sha512-CuHBogktKwpm5g2sRgv83jEy2ijFzBwMoYA60orPDR7ynsLijJDqgsi4RDGj3OJpy3Ieb+LYwiRmIOGyytgITA=="
   "resolved" "https://registry.npmmirror.com/nanoid/-/nanoid-3.3.2.tgz"
@@ -1591,6 +1606,16 @@
   "integrity" "sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA=="
   "resolved" "https://registry.npmmirror.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz"
   "version" "2.3.0"
+
+"vconsole@^3.14.6":
+  "integrity" "sha512-8Ffk2SfNe6EzKqZ0aNnNjpAVBVT7zgJo81lYEJdKySYLVYBeSawdSkWi9fSjDg3WsQhgS1vNPmRqJDTuwdVbnQ=="
+  "resolved" "https://registry.npmmirror.com/vconsole/-/vconsole-3.14.6.tgz"
+  "version" "3.14.6"
+  dependencies:
+    "@babel/runtime" "^7.17.2"
+    "copy-text-to-clipboard" "^3.0.1"
+    "core-js" "^3.11.0"
+    "mutation-observer" "^1.0.3"
 
 "which-boxed-primitive@^1.0.2":
   "integrity" "sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg=="

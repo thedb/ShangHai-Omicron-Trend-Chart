@@ -11,33 +11,10 @@ const CovidChart = dynamic(
   () => import('../components/covidChart'),
   { ssr: false }
 )
-// // This gets called on every request
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`http://qianke.xyz/jason/apps/covidData.json`)
-//   const data = await res.json()
-//   // Pass data to the page via props
-//   return { props: { data } }
-// }
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 const Home = () => {
   const [lang, setLang] = useState('cn');
-
-  // const [covidData, setData] = useState(null);
-  // const [isLoading, setLoading] = useState(false);
-  
-  // useEffect(() => {
-  //   setLoading(true);
-  //   fetch('/jason/apps/covidData.json')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data);
-  //       setLoading(false);
-  //     })
-  // }, [])
-  // if (isLoading) return <p>Loading...</p>
-  // if (!covidData) return <p>no data</p>
   
   const { data, error } = useSWR('/jason/apps/covidData.json', fetcher)
   
