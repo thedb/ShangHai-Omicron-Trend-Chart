@@ -142,9 +142,9 @@ const CovidChart = ({ showData, date, lang }) => {
         },
         series: _showData
       });
-      if (count === date.length) {
-        clearInterval(timer);
+      if (count === _date.length) {
         setAniStart(false);
+        clearInterval(timer);
       }
     }, 400);
   }
@@ -168,39 +168,22 @@ const CovidChart = ({ showData, date, lang }) => {
       setCacheDate(_date);
       setCacheShowData(_showData);
     }
-    if (val === '2' || val === '3') {
-      let _date, _index
-      if (val === '2') {
-        // March Data
-        _date = date.map(item => {
-          if (item.indexOf('3.') > -1) {
-            return item
-          }
-        }).filter(item => item);
-        _index = date.map((item, index) => {
-          if (item.indexOf('3.') > -1) {
-            return index
-          }
-          return null;
-        }).filter(item => item !== null );
-      }
-      if (val === '3') {
-        // March Data
-        _date = date.map(item => {
-          if (item.indexOf('4.') > -1) {
-            return item
-          }
-        }).filter(item => item);
-        _index = date.map((item, index) => {
-          if (item.indexOf('4.') > -1) {
-            return index
-          }
-          return null;
-        }).filter(item => item !== null );
-      }
+    if (val === '3' || val === '4') {
+      // month filter
+      const _date = date.map(item => {
+        if (item.indexOf(`${Number(val)}.`) > -1) {
+          return item
+        }
+      }).filter(item => item);
+      const _index = date.map((item, index) => {
+        if (item.indexOf(`${Number(val)}.`) > -1) {
+          return index
+        }
+        return null;
+      }).filter(item => item !== null );
       const _showData = [].concat(JSON.parse(JSON.stringify(showData)));
       for (let i = 0; i < showData.length; i++) {
-        _showData[i].data = showData[i].data.slice(_index[0], _index[_index.length]);
+        _showData[i].data = showData[i].data.slice(_index[0], _index[_index.length - 1] + 1);
         _showData[i].name = showData[i][`${lang}`]
       }
       setCacheDate(_date);
@@ -226,8 +209,8 @@ const CovidChart = ({ showData, date, lang }) => {
         <select onChange={onChange} className={`${aniStart ? styles.cannot_select : ''}`}>
           <option value="0" defaultValue>{ `${lang === 'cn' ? '全部日期': 'total days'}` }</option>
           <option value="1">{ `${lang === 'cn' ? '最近30天': 'last 30 days'}` }</option>
-          <option value="2">{ `${lang === 'cn' ? '三月数据': 'March Data'}` }</option>
-          <option value="3">{ `${lang === 'cn' ? '四月数据': 'April Data'}` }</option>
+          <option value="3">{ `${lang === 'cn' ? '三月数据': 'March Data'}` }</option>
+          <option value="4">{ `${lang === 'cn' ? '四月数据': 'April Data'}` }</option>
         </select>
       </section>
       <ReactEChartsCore
