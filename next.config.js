@@ -9,7 +9,7 @@ const withTM = require('next-transpile-modules')(['echarts', 'zrender']);
 
 const myModule = module.exports = withTM({
   assetPrefix: './',
-  // trailingSlash: true,
+  trailingSlash: true,
   exportPathMap: async function(
     defaultPathMap,
     { dev, dir, outDir, distDir, buildId }
