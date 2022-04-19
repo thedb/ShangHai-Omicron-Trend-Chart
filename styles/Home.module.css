@@ -55,9 +55,6 @@
   font-size: 4rem;
   /* margin-bottom: 40px; */
 }
-.title p{
-  cursor: pointer;
-}
 
 .lang_switch{
   display: flex;
@@ -65,6 +62,7 @@
 .lang_switch p {
   padding: 10px 20px;
   margin: 0 10px;
+  cursor: pointer;
 }
 .selected{
   border: 2px solid rgb(255, 149, 0);
