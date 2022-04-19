@@ -4,7 +4,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import dynamic from 'next/dynamic'
 
-// import covidData from '../assets/data.js'
 import useSWR from 'swr'
 
 const CovidChart = dynamic(
@@ -96,11 +95,10 @@ const Home = () => {
       data: totalInfected
     },
   ]
-
   
   const switchLang = (lang) => {
     setLang(lang);
-  }
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -120,10 +118,18 @@ const Home = () => {
         <section className={styles.content}>
           <h2 style={{ display: lang === 'cn' ? 'block' : 'none' }}>新增感染者趋势</h2>
           <h2 style={{ display: lang === 'en' ? 'block' : 'none' }}>New Infected Trend</h2>
-          <CovidChart showData={newCasesData} date={covidRecordDate} lang={lang}/>
+          <CovidChart
+            showData={newCasesData}
+            date={covidRecordDate}
+            lang={lang}
+          />
           <h2 style={{ display: lang === 'cn' ? 'block' : 'none' }}>累计感染者趋势</h2>
           <h2 style={{ display: lang === 'en' ? 'block' : 'none' }}>Total Infected Trend</h2>
-          <CovidChart showData={infectedData} date={covidRecordDate} lang={lang}/>
+          <CovidChart
+            showData={infectedData}
+            date={covidRecordDate}
+            lang={lang}
+          />
         </section>
       </main>
 

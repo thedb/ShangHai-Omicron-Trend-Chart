@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Home.module.css'
 // import the core library.
 import ReactEChartsCore from 'echarts-for-react/lib/core';
@@ -119,6 +119,8 @@ const CovidChart = ({ showData, date, lang }) => {
   const [aniStart, setAniStart] = useState(false);
   const [cacheDate, setCacheDate] = useState(date);
   const [cacheShowData, setCacheShowData] = useState(showData);
+  // const [timer, setTimer] = useState(null);
+  const increment = useRef(null);
   const mockAni = () => {
     setAniStart(true);
     if (aniStart) return;
@@ -127,7 +129,7 @@ const CovidChart = ({ showData, date, lang }) => {
     const _date = [].concat(JSON.parse(JSON.stringify(cacheDate)));
     const _showData = [].concat(JSON.parse(JSON.stringify(cacheShowData)));
     let count = 1;
-    const timer = setInterval(() => {
+    increment.current = setInterval(() => {
       count++;
       for (let i = 0; i < cacheShowData.length; i++) {
         _showData[i].data = cacheShowData[i].data.slice(0, count);
@@ -144,10 +146,17 @@ const CovidChart = ({ showData, date, lang }) => {
       });
       if (count === _date.length) {
         setAniStart(false);
-        clearInterval(timer);
+        clearInterval(increment.current);
       }
     }, 400);
   }
+  useEffect(() => {
+    setOptionsVal(0);
+    setAniStart(false);
+    clearInterval(increment.current);
+    setCacheDate(date);
+    setCacheShowData(showData);
+  }, [lang]);
 
   const onChange = (e) => {
     const val = e.target.value;
@@ -189,6 +198,7 @@ const CovidChart = ({ showData, date, lang }) => {
       setCacheDate(_date);
       setCacheShowData(_showData);
     }
+    setOptionsVal(val);
   }
   useEffect(() => {
     if (aniStart) return;
@@ -202,11 +212,13 @@ const CovidChart = ({ showData, date, lang }) => {
       series: cacheShowData
     });
   }, [cacheShowData]);
+  
+  const [optionsVal, setOptionsVal] = useState('oranges')
   return (
     <section className={styles.charts_content}>
       <section className={`${styles.charts_sort_by} ${aniStart ? styles.cannot_sort : ''}`}>
         { `${lang === 'cn' ? '筛选': 'Filter'}` }&nbsp;
-        <select onChange={onChange} className={`${aniStart ? styles.cannot_select : ''}`}>
+        <select value={optionsVal} onChange={onChange} className={`${aniStart ? styles.cannot_select : ''}`}>
           <option value="0" defaultValue>{ `${lang === 'cn' ? '全部日期': 'total days'}` }</option>
           <option value="1">{ `${lang === 'cn' ? '最近30天': 'last 30 days'}` }</option>
           <option value="3">{ `${lang === 'cn' ? '三月数据': 'March Data'}` }</option>
