@@ -14,91 +14,99 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 const Home = () => {
   const [lang, setLang] = useState('cn');
-  
+  const [_covidRecordDate, setCovidRecordDate] = useState(null);
+  const [_newCasesData, setNewCasesData] = useState(null);
+  const [_infectedData, setInfectedData] = useState(null);
   const { data, error } = useSWR('/jason/apps/covidData.json', fetcher)
-  
+  useEffect(() => {
+    if (!data) return;
+    const covidData = data;
+    const covidRecordDate = covidData.map(item => item.date);
+    setCovidRecordDate(covidRecordDate);
+    const newConfirmed = covidData.map(item => item.newConfirmed);
+    const totalConfirmed = [];
+    totalConfirmed.push(newConfirmed.reduce((total, current) => {
+      if (total !== 0) {
+        totalConfirmed.push(total)
+      }
+      return total + current;
+    }, 0));
+    const newAsymptomatic = covidData.map(item => item.newAsymptomatic);
+    const totalAsymptomatic = [];
+    totalAsymptomatic.push(newAsymptomatic.reduce((total, current) => {
+      if (total !== 0) {
+        totalAsymptomatic.push(total)
+      }
+      return total + current;
+    }, 0));
+    const totalNewInfected = newConfirmed.map((item, index) => {
+      return item + newAsymptomatic[index]
+    });
+    const totalInfected = totalConfirmed.map((item, index) => {
+      return item + totalAsymptomatic[index]
+    });
+    const newCasesData = [
+      {
+        en: 'New Confirmed',
+        cn: '新增确诊',
+        type: 'line',
+        data: newConfirmed
+      },
+      {
+        en: 'New Asymptomatic',
+        cn: '新增无症状感染者',
+        type: 'line',
+        data: newAsymptomatic
+      },
+      {
+        en: 'Total New Infected',
+        cn: '总计新增患者',
+        type: 'line',
+        itemStyle: {
+          color: "rgba(228, 57, 60, 1)"
+        },
+        lineStyle: {
+          color: "rgba(228, 57, 60, 1)"
+        },
+        data: totalNewInfected
+      },
+    ]
+    setNewCasesData(newCasesData);
+    const infectedData = [
+      {
+        en: 'Total Confirmed',
+        cn: '总计新增患者',
+        type: 'line',
+        data: totalConfirmed
+      },
+      {
+        en: 'Total Asymptomatic',
+        cn: '总计无症状感染者',
+        type: 'line',
+        data: totalAsymptomatic
+      },
+      {
+        en: 'Total Infected',
+        cn: '总计感染者',
+        type: 'line',
+        itemStyle: {
+          color: "rgba(0, 0, 0, .65)"
+        },
+        lineStyle: {
+          color: "rgba(0, 0, 0, .65)"
+        },
+        data: totalInfected
+      },
+    ]
+    setInfectedData(infectedData);
+  }, [data]);
   if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-  const covidData = data;
-  const covidRecordDate = covidData.map(item => item.date);
-  const newConfirmed = covidData.map(item => item.newConfirmed);
-  const totalConfirmed = [];
-  totalConfirmed.push(newConfirmed.reduce((total, current) => {
-    if (total !== 0) {
-      totalConfirmed.push(total)
-    }
-    return total + current;
-  }, 0));
-  const newAsymptomatic = covidData.map(item => item.newAsymptomatic);
-  const totalAsymptomatic = [];
-  totalAsymptomatic.push(newAsymptomatic.reduce((total, current) => {
-    if (total !== 0) {
-      totalAsymptomatic.push(total)
-    }
-    return total + current;
-  }, 0));
-  const totalNewInfected = newConfirmed.map((item, index) => {
-    return item + newAsymptomatic[index]
-  });
-  const totalInfected = totalConfirmed.map((item, index) => {
-    return item + totalAsymptomatic[index]
-  });
-  const newCasesData = [
-    {
-      en: 'New Confirmed',
-      cn: '新增确诊',
-      type: 'line',
-      data: newConfirmed
-    },
-    {
-      en: 'New Asymptomatic',
-      cn: '新增无症状感染者',
-      type: 'line',
-      data: newAsymptomatic
-    },
-    {
-      en: 'Total New Infected',
-      cn: '总计新增患者',
-      type: 'line',
-      itemStyle: {
-        color: "rgba(228, 57, 60, 1)"
-      },
-      lineStyle: {
-        color: "rgba(228, 57, 60, 1)"
-      },
-      data: totalNewInfected
-    },
-  ]
-  const infectedData = [
-    {
-      en: 'Total Confirmed',
-      cn: '总计新增患者',
-      type: 'line',
-      data: totalConfirmed
-    },
-    {
-      en: 'Total Asymptomatic',
-      cn: '总计无症状感染者',
-      type: 'line',
-      data: totalAsymptomatic
-    },
-    {
-      en: 'Total Infected',
-      cn: '总计感染者',
-      type: 'line',
-      itemStyle: {
-        color: "rgba(0, 0, 0, .65)"
-      },
-      lineStyle: {
-        color: "rgba(0, 0, 0, .65)"
-      },
-      data: totalInfected
-    },
-  ]
+  // if (!data) return <div>loading...</div>
   
   const switchLang = (lang) => {
     setLang(lang);
   };
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -118,18 +126,20 @@ const Home = () => {
         <section className={styles.content}>
           <h2 style={{ display: lang === 'cn' ? 'block' : 'none' }}>新增感染者趋势</h2>
           <h2 style={{ display: lang === 'en' ? 'block' : 'none' }}>New Infected Trend</h2>
-          <CovidChart
-            showData={newCasesData}
-            date={covidRecordDate}
+          {data ? <CovidChart
+            showData={_newCasesData}
+            date={_covidRecordDate}
             lang={lang}
-          />
+          /> : <div>loading...</div>}
           <h2 style={{ display: lang === 'cn' ? 'block' : 'none' }}>累计感染者趋势</h2>
           <h2 style={{ display: lang === 'en' ? 'block' : 'none' }}>Total Infected Trend</h2>
-          <CovidChart
-            showData={infectedData}
-            date={covidRecordDate}
-            lang={lang}
-          />
+          {data ? 
+            <CovidChart
+              showData={_infectedData}
+              date={_covidRecordDate}
+              lang={lang}
+            /> : <div>loading...</div>
+          }
         </section>
       </main>
 
