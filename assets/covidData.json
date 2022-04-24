@@ -48,5 +48,9 @@
   { "date": "4.16", "newConfirmed": 3238, "newAsymptomatic": 21582 },
   { "date": "4.17", "newConfirmed": 2417, "newAsymptomatic": 19831 },
   { "date": "4.18", "newConfirmed": 3084, "newAsymptomatic": 17332 },
-  { "date": "4.19", "newConfirmed": 2494, "newAsymptomatic": 16407 }
+  { "date": "4.19", "newConfirmed": 2494, "newAsymptomatic": 16407 },
+  { "date": "4.20", "newConfirmed": 2634, "newAsymptomatic": 15861 },
+  { "date": "4.21", "newConfirmed": 1931, "newAsymptomatic": 15698 },
+  { "date": "4.22", "newConfirmed": 2736, "newAsymptomatic": 20634 },
+  { "date": "4.23", "newConfirmed": 1401, "newAsymptomatic": 19657 }
 ]
