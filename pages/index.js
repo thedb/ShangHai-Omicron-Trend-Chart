@@ -50,20 +50,27 @@ const Home = () => {
         en: 'New Confirmed',
         cn: '新增确诊',
         type: 'line',
-        data: newConfirmed
+        data: newConfirmed,
+        itemStyle: {
+          opacity: 0
+        },
       },
       {
         en: 'New Asymptomatic',
         cn: '新增无症状感染者',
         type: 'line',
-        data: newAsymptomatic
+        data: newAsymptomatic,
+        itemStyle: {
+          opacity: 0
+        },
       },
       {
         en: 'Total New Infected',
         cn: '总计新增患者',
         type: 'line',
         itemStyle: {
-          color: "rgba(228, 57, 60, 1)"
+          // color: "rgba(228, 57, 60, 1)",
+          opacity: 0
         },
         lineStyle: {
           color: "rgba(228, 57, 60, 1)"
@@ -77,20 +84,27 @@ const Home = () => {
         en: 'Total Confirmed',
         cn: '总计新增患者',
         type: 'line',
-        data: totalConfirmed
+        data: totalConfirmed,
+        itemStyle: {
+          opacity: 0
+        },
       },
       {
         en: 'Total Asymptomatic',
         cn: '总计无症状感染者',
         type: 'line',
-        data: totalAsymptomatic
+        data: totalAsymptomatic,
+        itemStyle: {
+          opacity: 0
+        },
       },
       {
         en: 'Total Infected',
         cn: '总计感染者',
         type: 'line',
         itemStyle: {
-          color: "rgba(0, 0, 0, .65)"
+          color: "rgba(0, 0, 0, .65)",
+          opacity: 0
         },
         lineStyle: {
           color: "rgba(0, 0, 0, .65)"

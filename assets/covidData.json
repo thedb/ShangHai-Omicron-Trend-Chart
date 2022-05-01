@@ -58,5 +58,7 @@
   { "date": "4.26", "newConfirmed": 1606, "newAsymptomatic": 11956 },
   { "date": "4.27", "newConfirmed": 1292, "newAsymptomatic": 9330 },
   { "date": "4.28", "newConfirmed": 5487, "newAsymptomatic": 9545 },
-  { "date": "4.29", "newConfirmed": 1249, "newAsymptomatic": 8932 }
+  { "date": "4.29", "newConfirmed": 1249, "newAsymptomatic": 8932 },
+  { "date": "4.30", "newConfirmed": 788, "newAsymptomatic": 7084 },
+  { "date": "5.1", "newConfirmed": 788, "newAsymptomatic": 7084 }
 ]

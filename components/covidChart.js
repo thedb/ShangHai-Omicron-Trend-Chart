@@ -75,9 +75,13 @@ echarts.use(
 );
 
 const CovidChart = ({ showData, date, lang }) => {
+  // const [allowAni, setAniStatus] = useState(true);
+  // const [aniDuration, setAniDuration] = useState(1200);
   let echarts_react;
   const options = {
     animationEasing: 'cubicOut',
+    // animationDuration: aniDuration,
+    // animation: allowAni,
     title: {
       // text: 'Covid Trend Chart'
     },
@@ -111,15 +115,36 @@ const CovidChart = ({ showData, date, lang }) => {
     yAxis: {
       type: 'value'
     },
+    // endLabel: {
+    //   show: true,
+    // },
     series: showData.map(item => {
       item.name = item[`${lang}`];
+      // item.endLabel = {
+      //   show: true,
+      //   formatter: function (params) {
+      //     console.log(params);
+      //     return params.seriesName + ': ' + params.value;
+      //   }
+      // }
+      // item.labelLayout = {
+      //   moveOverlap: 'shiftY'
+      // },
+      // item.emphasis = {
+      //   focus: 'series'
+      // }
       return item
     })
   };
   const [aniStart, setAniStart] = useState(false);
   const [cacheDate, setCacheDate] = useState(date);
   const [cacheShowData, setCacheShowData] = useState(showData);
-  // const [timer, setTimer] = useState(null);
+
+  // const totalMockAni = () => {
+  //   console.log('totalMockAni');
+  //   const echartsInstance = echarts_react.getEchartsInstance();
+  //   echartsInstance.clear();
+  // }
   const increment = useRef(null);
   const mockAni = () => {
     setAniStart(true);
@@ -177,7 +202,7 @@ const CovidChart = ({ showData, date, lang }) => {
       setCacheDate(_date);
       setCacheShowData(_showData);
     }
-    if (val === '3' || val === '4') {
+    if (val === '3' || val === '4' || val === '5') {
       // month filter
       const _date = date.map(item => {
         if (item.indexOf(`${Number(val)}.`) > -1) {
@@ -239,6 +264,7 @@ const CovidChart = ({ showData, date, lang }) => {
       <section className={styles.wrapper}>
         <p className={styles.button} style={{ display: lang === 'cn' ? 'inline-block' : 'none' }} onClick={mockAni}>播放趋势动画</p>
         <p className={styles.button} style={{ display: lang === 'en' ? 'inline-block' : 'none' }} onClick={mockAni}>Play Trend Animation</p>
+        {/* <p className={styles.button} style={{ display: lang === 'cn' ? 'inline-block' : 'none' }} onClick={totalMockAni}>播放总体动画</p> */}
       </section>
     </section>
   )

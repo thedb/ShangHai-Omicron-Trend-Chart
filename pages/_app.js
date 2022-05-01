@@ -1,11 +1,11 @@
 import '../styles/globals.css';
 import Script from 'next/script';
 import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 
 
 
-const DynamicVconsole = dynamic(() => import('../components/vConsole'), { ssr: false, });
+// const DynamicVconsole = dynamic(() => import('../components/vConsole'), { ssr: false, });
 
 function MyApp({ Component, pageProps }) {
   const shareLink = 'http://qianke.xyz/tesseract/omicron-trend/';
@@ -56,7 +56,7 @@ function MyApp({ Component, pageProps }) {
   }, [])
   return (
     <>
-      <DynamicVconsole />
+      {/* <DynamicVconsole /> */}
       <Script src="//res.wx.qq.com/open/js/jweixin-1.4.0.js" strategy="beforeInteractive"></Script>
       <Component {...pageProps} />
     </>
