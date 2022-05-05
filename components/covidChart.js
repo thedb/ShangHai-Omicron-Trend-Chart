@@ -248,6 +248,7 @@ const CovidChart = ({ showData, date, lang }) => {
           <option value="1">{ `${lang === 'cn' ? '最近30天': 'last 30 days'}` }</option>
           <option value="3">{ `${lang === 'cn' ? '三月数据': 'March Data'}` }</option>
           <option value="4">{ `${lang === 'cn' ? '四月数据': 'April Data'}` }</option>
+          <option value="5">{ `${lang === 'cn' ? '五月数据': 'May Data'}` }</option>
         </select>
       </section>
       <ReactEChartsCore
