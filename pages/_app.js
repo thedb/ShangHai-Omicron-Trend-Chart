@@ -66,9 +66,7 @@ function MyApp({ Component, pageProps }) {
     } else {
       requestUrl = '/open/wx_official/js_api/js_config';
     }
-    setTimeout(() => {
-      getWxConfig(requestUrl);
-    }, 1000);
+    getWxConfig(requestUrl);
   }, [])
   return (
     <>
