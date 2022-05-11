@@ -67,5 +67,7 @@
   { "date": "5.5", "newConfirmed": 245, "newAsymptomatic": 4024 },
   { "date": "5.6", "newConfirmed": 253, "newAsymptomatic": 3961 },
   { "date": "5.7", "newConfirmed": 215, "newAsymptomatic": 3760 },
-  { "date": "5.8", "newConfirmed": 322, "newAsymptomatic": 3625 }
+  { "date": "5.8", "newConfirmed": 322, "newAsymptomatic": 3625 },
+  { "date": "5.9", "newConfirmed": 234, "newAsymptomatic": 2780 },
+  { "date": "5.9", "newConfirmed": 228, "newAsymptomatic": 1259 }
 ]

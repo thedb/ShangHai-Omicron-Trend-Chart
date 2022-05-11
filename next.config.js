@@ -37,8 +37,8 @@ myModule.rewrites = async () => {
       destination: "http://qianke.xyz/jason/apps/covidData.json",
     },
     {
-      source: "/h5_gallery_api/wx_config",
-      destination: "http://gallery-test.qianke.xyz/h5_gallery_api/wx_config",
+      source: "/open/wx_official/js_api/js_config",
+      destination: "http://wx.qianke.xyz/open/wx_official/js_api/js_config",
     },
   ];
 };

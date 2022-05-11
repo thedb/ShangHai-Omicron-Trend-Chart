@@ -124,14 +124,14 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>ShangHai Omicron Trend Chart</title>
+        <title>2022 ShangHai Omicron Trends Chart</title>
         <meta name="description" content="ShangHai Omicron Trend Chart" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <p style={{ display: lang === 'cn' ? 'block' : 'none' }}>上海奥密克戎疫情趋势图</p>
-          <p style={{ display: lang === 'en' ? 'block' : 'none' }}>ShangHai Omicron Trend Chart</p>
+          <p style={{ display: lang === 'cn' ? 'block' : 'none' }}>2022年上海奥密克戎疫情趋势图</p>
+          <p style={{ display: lang === 'en' ? 'block' : 'none' }}>2022 ShangHai Omicron Trends Chart</p>
         </h1>
         <section className={styles.lang_switch}>
           <p className={`${lang === 'cn' ? styles.selected : ''}`} onClick={() => { switchLang('cn') }}>CN</p>
