@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -aeuo pipefail
+
+# -a: Marks all created or modified variables or functions for export.
+# -u: Treat unset variables as an error when substituting.
+# -x: Print commands and their arguments as they are executed.
+# -e: Exit immediately if a command exits with a non-zero status.
+
+# find .env.default file 
+if [ ! -f .env.default ]; then
+	echo "Tips: No .env.default file"
+	exit
+fi
+
+# create the dotenv file if it doesn't exist
+if [ ! -f .env ]; then
+	echo "Use .env.default file to create .env file"
+  cp .env.default .env
+fi
+
+source .env
+
+SKIP_INSTALL=0
+NO_DEV=
+# $#: total number of command-line arguments
+# -gt: >
+# while [[ $# -gt 0 ]]; do
+#     case $1 in
+#         --skip-install)
+#             SKIP_INSTALL=1
+#             shift
+#             ;;
+#         --no-dev)
+#             NO_DEV='--no-dev'
+#             shift
+#             ;;
+#         *)
+#             break
+#             ;;
+#     esac
+# done
+
+for i in "$@"; do
+	if [ $i == --skip-install ]; then
+		SKIP_INSTALL=1
+	elif [ $i == --no-dev ]; then
+		NO_DEV='--no-dev'
+	fi
+done
+
+# Skip install modules
+echo "SKIP_INSTALL: $SKIP_INSTALL"
+if [ ! $SKIP_INSTALL -eq 1 ]; then
+	echo "install modules and start"
+	docker-compose up --build
+else
+	echo "start modules"
+	docker-compose up
+fi
